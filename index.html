@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Story Page — Font Pair Sandbox (DH / PV)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- All option families loaded up front so pair switching is instant -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Newsreader:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Anek+Latin:wght@500;600;700&family=Anek+Kannada:wght@500;600;700&family=Noto+Serif+Kannada:wght@500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Hind+Mysuru:wght@400;500;600;700&family=Kolar&family=Benne&family=EB+Garamond:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-site="dh">
+
+<!-- ============ CONTROL PANELS (floating) ============ -->
+<div class="controls" aria-label="Preview controls">
+  <div class="site-toggle" role="group" aria-label="Publication">
+    <span class="controls-label">Design</span>
+    <button class="site-button active" type="button" data-site="dh" aria-pressed="true">DH</button>
+    <button class="site-button" type="button" data-site="pv" aria-pressed="false">PV</button>
+  </div>
+  <button class="panel-toggle" id="panelToggle" type="button" aria-expanded="false" aria-controls="fontPanel">
+    <span class="pt-icon">Aa</span><span class="pt-label">Show fonts</span>
+  </button>
+  <div class="font-panel" role="group" aria-label="Font pairing" id="fontPanel">
+    <span class="controls-label">Font pair</span>
+    <div class="font-options" id="fontOptions"><!-- buttons injected by script.js --></div>
+  </div>
+</div>
+
+<!-- ============ MASTHEAD / NAV ============ -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <button class="icon-btn hamburger" id="menuButton" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="brand" href="#" aria-label="Home">
+      <span class="brand-dh" data-lang="en">Deccan Herald</span>
+      <span class="brand-pv" data-lang="kn">ಪ್ರಜಾವಾಣಿ</span>
+    </a>
+    <button class="icon-btn search-btn" id="searchButton" aria-label="Search">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm11 18l-6-6"/></svg>
+    </button>
+  </div>
+  <nav class="section-nav" aria-label="Sections">
+    <ul>
+      <li data-lang="en" class="nav-en"><a href="#">India</a></li>
+      <li data-lang="en" class="nav-en"><a href="#">Karnataka</a></li>
+      <li data-lang="en" class="nav-en"><a href="#" class="nav-premium">Premium</a></li>
+      <li data-lang="en" class="nav-en"><a href="#">Opinion</a></li>
+      <li data-lang="en" class="nav-en"><a href="#">World</a></li>
+      <li data-lang="en" class="nav-en"><a href="#">Business</a></li>
+      <li data-lang="en" class="nav-en"><a href="#">Sports</a></li>
+      <li data-lang="en" class="nav-en"><a href="#">Entertainment</a></li>
+      <li data-lang="kn" class="nav-kn"><a href="#">ಜಿಲ್ಲೆ</a></li>
+      <li data-lang="kn" class="nav-kn"><a href="#">ಕರ್ನಾಟಕ</a></li>
+      <li data-lang="kn" class="nav-kn"><a href="#">ದೇಶ</a></li>
+      <li data-lang="kn" class="nav-kn"><a href="#">ವಿಶ್ವ</a></li>
+      <li data-lang="kn" class="nav-kn"><a href="#">ವಾಣಿಜ್ಯ</a></li>
+      <li data-lang="kn" class="nav-kn"><a href="#">ಕ್ರೀಡೆ</a></li>
+      <li data-lang="kn" class="nav-kn"><a href="#">ಮನರಂಜನೆ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- slide-in menu -->
+<div class="menu-panel" id="menuPanel" hidden>
+  <div class="menu-head">
+    <strong data-lang="en">Menu</strong><strong data-lang="kn">ಮೆನು</strong>
+    <button class="icon-btn" id="closeMenu" aria-label="Close menu">✕</button>
+  </div>
+  <div class="menu-search"><input type="search" placeholder="Search…" aria-label="Search"></div>
+  <ul class="menu-links">
+    <li data-lang="en"><a href="#">India</a></li><li data-lang="en"><a href="#">Karnataka</a></li>
+    <li data-lang="en"><a href="#">Premium</a></li><li data-lang="en"><a href="#">Opinion</a></li>
+    <li data-lang="en"><a href="#">World</a></li><li data-lang="en"><a href="#">Business</a></li>
+    <li data-lang="kn"><a href="#">ಜಿಲ್ಲೆ</a></li><li data-lang="kn"><a href="#">ಕರ್ನಾಟಕ</a></li>
+    <li data-lang="kn"><a href="#">ದೇಶ</a></li><li data-lang="kn"><a href="#">ವಿಶ್ವ</a></li>
+    <li data-lang="kn"><a href="#">ವಾಣಿಜ್ಯ</a></li><li data-lang="kn"><a href="#">ಕ್ರೀಡೆ</a></li>
+  </ul>
+</div>
+
+<!-- ============ ARTICLE ============ -->
+<main class="article">
+
+  <!-- breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <span data-lang="en"><a href="#">Home</a> › <a href="#">India</a></span>
+    <span data-lang="kn"><a href="#">ಮುಖಪುಟ</a> › <a href="#">ಜಿಲ್ಲೆ</a> › <a href="#">ಬೆಂಗಳೂರು</a></span>
+  </nav>
+
+  <!-- kicker -->
+  <div class="kicker">
+    <span data-lang="en">India</span>
+    <span data-lang="kn">ಬೆಂಗಳೂರು</span>
+  </div>
+
+  <!-- headline -->
+  <h1 class="headline">
+    <span data-lang="en">Onion wholesale prices drop 9% in nine days; retail rates expected to ease soon</span>
+    <span data-lang="kn">ನಮ್ಮ ಮೆಟ್ರೊ ಕಿತ್ತಳೆ ಮಾರ್ಗದಲ್ಲಿ ಮೇಲ್ಸೇತುವೆ ನಿರ್ಮಾಣ: ಟೆಂಡರ್ ರದ್ದು</span>
+  </h1>
+
+  <!-- standfirst -->
+  <p class="standfirst">
+    <span data-lang="en">Consumer Affairs Secretary Nidhi Khare said onion prices in wholesale markets have fallen 9 per cent over the past nine days, expressing confidence that retail prices will begin moderating soon.</span>
+    <span data-lang="kn">ನಮ್ಮ ಮೆಟ್ರೊ ಕಿತ್ತಳೆ ಮಾರ್ಗದ ಸಿವಿಲ್‌ ಕಾಮಗಾರಿಗಳಿಗೆ 10 ತಿಂಗಳ ಹಿಂದೆ ಕರೆದಿದ್ದ ಮೂರು ಪ್ಯಾಕೇಜ್‌ಗಳ ಟೆಂಡರ್‌ಗಳನ್ನು ಬಿಎಂಆರ್‌ಸಿಎಲ್‌ ರದ್ದುಗೊಳಿಸಿದೆ.</span>
+  </p>
+
+  <!-- byline row -->
+  <div class="byline">
+    <img class="avatar" src="article-images/pet-dogs-policy.jpg" alt="">
+    <div class="byline-text">
+      <span class="author">
+        <span data-lang="en">Ajith Athrady</span>
+        <span data-lang="kn">ಬಾಲಕೃಷ್ಣ ಪಿ.ಎಚ್‌.</span>
+      </span>
+      <span class="timestamp">
+        <span data-lang="en">Last Updated: 16 September 2026, 10:08 IST</span>
+        <span data-lang="kn">ಕೊನೆಯ ನವೀಕರಣ: 7 ಅಕ್ಟೋಬರ್ 2026, 1:48 IST</span>
+      </span>
+    </div>
+    <a class="join-chip" href="#">
+      <span data-lang="en">Join Us</span><span data-lang="kn">ಜೊತೆಯಾಗಿ</span>
+    </a>
+  </div>
+
+  <!-- share row -->
+  <div class="share-row" aria-label="Share">
+    <button class="share whatsapp" type="button" aria-label="WhatsApp">WA</button>
+    <button class="share facebook" type="button" aria-label="Facebook">f</button>
+    <button class="share x" type="button" aria-label="X">X</button>
+    <button class="share telegram" type="button" aria-label="Telegram">T</button>
+    <button class="share copy" type="button" aria-label="Copy link">⧉</button>
+  </div>
+
+  <!-- hero -->
+  <figure class="hero">
+    <img src="article-images/onion-prices.jpg" alt="">
+    <figcaption>
+      <span data-lang="en">Representative image showing onions at a wholesale market. <em>PTI Photo</em></span>
+      <span data-lang="kn">ನಮ್ಮ ಮೆಟ್ರೊ ಕಿತ್ತಳೆ ಮಾರ್ಗದ ನಿರ್ಮಾಣ ಕಾಮಗಾರಿ. <em>ಪ್ರಜಾವಾಣಿ ಚಿತ್ರ</em></span>
+    </figcaption>
+  </figure>
+
+  <!-- body -->
+  <div class="article-body">
+    <!-- English body -->
+    <div data-lang="en">
+      <p>Khare said onion availability remains comfortable and that the government is selling at Rs 35 per kg across 48 cities using hybrid transportation to keep retail intervention effective during the festive season.</p>
+      <p>"Analysis of mandi prices over the last nine days showed a clear 9 per cent decline, which is expected to have a positive impact on retail rates," she told reporters.</p>
+
+      <div class="also-read">
+        <span class="also-label">Also Read</span>
+        <a href="#">Government releases buffer onion stock to cool retail prices ahead of festivals</a>
+      </div>
+
+      <h2>Buffer stock and price stabilisation</h2>
+      <p>The Price Stabilisation Fund currently holds a buffer of 1.21 lakh tonnes, built up during the peak arrival season. Officials said calibrated releases into deficit markets have helped arrest the sharp swings seen earlier in the year.</p>
+
+      <blockquote>"We are confident that retail prices will follow the wholesale trend within the next two weeks," the Secretary said.</blockquote>
+
+      <p>Production figures for the season remain broadly in line with the five-year average. The government pointed to the following measures as central to its intervention:</p>
+      <ul>
+        <li>Retail sale at Rs 35 per kg across 48 cities</li>
+        <li>Hybrid rail-and-road transport to cut logistics time</li>
+        <li>Targeted buffer releases into high-price mandis</li>
+      </ul>
+
+      <figure class="inline-img">
+        <img src="article-images/rtc-reform.jpg" alt="">
+        <figcaption>Mandi arrivals have picked up over the last fortnight. <em>PTI Photo</em></figcaption>
+      </figure>
+
+      <p>Inflation data for the month is expected to reflect the easing trend, with food prices seen as the main driver of the recent moderation in the headline number.</p>
+    </div>
+
+    <!-- Kannada body -->
+    <div data-lang="kn">
+      <p>ಕಿತ್ತಳೆ ಮಾರ್ಗದ ಉದ್ದಕ್ಕೂ ಡಬಲ್ ಡೆಕರ್‌ ಮೇಲ್ಸೇತುವೆ ನಿರ್ಮಿಸುವ ರಾಜ್ಯ ಸರ್ಕಾರದ ಪ್ರಸ್ತಾವಕ್ಕೆ ಕೇಂದ್ರ ಸರ್ಕಾರ ಒಪ್ಪಿಗೆ ನೀಡದ ಕಾರಣ, ಎಲ್ಲ ಕಡೆಯ ಬದಲು ಅಗತ್ಯ ಇರುವ ಕಡೆ ಮಾತ್ರ ಡಬಲ್‌ ಡೆಕರ್‌ ನಿರ್ಮಿಸಲು ಬಿಎಂಆರ್‌ಸಿಎಲ್‌ ನಿರ್ಧರಿಸಿರುವುದರಿಂದ ಟೆಂಡರ್‌ ವಾಪಸ್‌ ಪಡೆದಿದೆ.</p>
+      <p>ಡಬಲ್‌ ಡೆಕರ್‌ಗಾಗಿ ಹೆಚ್ಚುವರಿ ಜಮೀನು ಅಗತ್ಯ ಇದ್ದಿದ್ದರಿಂದ 2025ರ ಜನವರಿಯಲ್ಲಿ ಕಿತ್ತಳೆ ಮಾರ್ಗಕ್ಕೆ ಮರು ಸರ್ವೆ ಆರಂಭಿಸಲಾಗಿತ್ತು. ಸರ್ವೆ ಪೂರ್ಣಗೊಳಿಸಿ ಈ ವರ್ಷ ಆರಂಭದಲ್ಲಿ ಟೆಂಡರ್‌ ಕರೆಯಲಾಗಿತ್ತು.</p>
+
+      <div class="also-read">
+        <span class="also-label">ಇದನ್ನೂ ಓದಿ</span>
+        <a href="#">ನಮ್ಮ ಮೆಟ್ರೊ ಹಂತ–3: ಕಾಮಗಾರಿಗೆ ವೇಗ ನೀಡಲು ಹೊಸ ಯೋಜನೆ</a>
+      </div>
+
+      <h2>ಮರು ಸರ್ವೆ ಮತ್ತು ಹೊಸ ವಿನ್ಯಾಸ</h2>
+      <p>ಅಗತ್ಯ ಇರುವ ಕಡೆಗಳಲ್ಲಿ ಮಾತ್ರ ಡಬಲ್‌ ಡೆಕರ್‌ ಮೇಲ್ಸೇತುವೆ ನಿರ್ಮಿಸುವುದರಿಂದ ಯೋಜನಾ ವೆಚ್ಚ ಕಡಿಮೆಯಾಗಲಿದೆ ಎಂದು ಅಧಿಕಾರಿಗಳು ತಿಳಿಸಿದ್ದಾರೆ. ಹೊಸ ವಿನ್ಯಾಸದ ಪ್ರಕಾರ ಟೆಂಡರ್‌ ಅನ್ನು ಮರು ಕರೆಯಲಾಗುವುದು.</p>
+
+      <blockquote>"ಅಗತ್ಯ ಇರುವ ಕಡೆ ಮಾತ್ರ ಡಬಲ್‌ ಡೆಕರ್‌ ನಿರ್ಮಿಸುವುದರಿಂದ ಸಮಯ ಮತ್ತು ವೆಚ್ಚ ಎರಡೂ ಉಳಿತಾಯವಾಗಲಿದೆ," ಎಂದು ಬಿಎಂಆರ್‌ಸಿಎಲ್‌ ಅಧಿಕಾರಿ ಹೇಳಿದರು.</blockquote>
+
+      <p>ಈ ಯೋಜನೆಯ ಪ್ರಮುಖ ಅಂಶಗಳು ಹೀಗಿವೆ:</p>
+      <ul>
+        <li>ಅಗತ್ಯ ಇರುವ ಕಡೆ ಮಾತ್ರ ಡಬಲ್‌ ಡೆಕರ್‌ ನಿರ್ಮಾಣ</li>
+        <li>ಮರು ಸರ್ವೆ ಆಧಾರದ ಮೇಲೆ ಹೊಸ ವಿನ್ಯಾಸ</li>
+        <li>ಯೋಜನಾ ವೆಚ್ಚ ಕಡಿತ</li>
+      </ul>
+
+      <figure class="inline-img">
+        <img src="article-images/rtc-reform.jpg" alt="">
+        <figcaption>ಕಿತ್ತಳೆ ಮಾರ್ಗದ ನಿರ್ಮಾಣ ಸ್ಥಳ. <em>ಪ್ರಜಾವಾಣಿ ಚಿತ್ರ</em></figcaption>
+      </figure>
+
+      <p>ಟೆಂಡರ್‌ ಮರು ಕರೆದ ಬಳಿಕ ಕಾಮಗಾರಿ ಆರಂಭವಾಗಲಿದ್ದು, ಪ್ರಯಾಣಿಕರಿಗೆ ಶೀಘ್ರದಲ್ಲೇ ಹೊಸ ಮಾರ್ಗದ ಸೌಲಭ್ಯ ದೊರೆಯುವ ನಿರೀಕ್ಷೆ ಇದೆ.</p>
+    </div>
+
+    <!-- Go Ad Lite prompt -->
+    <aside class="adlite">
+      <strong data-lang="en">Enjoying this story?</strong>
+      <strong data-lang="kn">ಈ ಸುದ್ದಿ ಇಷ್ಟವಾಯಿತೇ?</strong>
+      <span data-lang="en">Go Ad Lite — a cleaner, faster read for subscribers.</span>
+      <span data-lang="kn">ಜಾಹೀರಾತು ರಹಿತ ಓದಿಗೆ ಚಂದಾದಾರರಾಗಿ.</span>
+      <a href="#" class="adlite-cta" data-lang="en">Go Ad Lite</a>
+      <a href="#" class="adlite-cta" data-lang="kn">ಜಾಹೀರಾತು ರಹಿತ</a>
+    </aside>
+
+    <!-- tags -->
+    <div class="tags">
+      <span class="tag" data-lang="en">#Onion</span><span class="tag" data-lang="en">#Prices</span><span class="tag" data-lang="en">#Economy</span>
+      <span class="tag" data-lang="kn">#ನಮ್ಮಮೆಟ್ರೊ</span><span class="tag" data-lang="kn">#ಬೆಂಗಳೂರು</span><span class="tag" data-lang="kn">#ಬಿಎಂಆರ್‌ಸಿಎಲ್‌</span>
+    </div>
+  </div>
+
+  <!-- related -->
+  <section class="related" aria-label="Stories you may like">
+    <h2 class="related-title">
+      <span data-lang="en">Stories you may like</span>
+      <span data-lang="kn">ನಿಮಗಾಗಿ ಆಯ್ದ ಸುದ್ದಿಗಳು</span>
+    </h2>
+    <div class="related-grid">
+      <a class="rel-card" href="#">
+        <img src="article-images/rahul-upi.jpg" alt="">
+        <span class="rel-cat" data-lang="en">India</span><span class="rel-cat" data-lang="kn">ದೇಶ</span>
+        <span class="rel-head" data-lang="en">Rahul Gandhi attacks PM Modi over 'UPI tax'</span>
+        <span class="rel-head" data-lang="kn">'ಯುಪಿಐ ತೆರಿಗೆ' ಕುರಿತು ಪ್ರಧಾನಿ ವಿರುದ್ಧ ರಾಹುಲ್ ಟೀಕೆ</span>
+      </a>
+      <a class="rel-card" href="#">
+        <img src="article-images/navy-collision.jpg" alt="">
+        <span class="rel-cat" data-lang="en">India</span><span class="rel-cat" data-lang="kn">ದೇಶ</span>
+        <span class="rel-head" data-lang="en">Pakistani ship's 'unsafe' manoeuvre led to collision with Navy unit</span>
+        <span class="rel-head" data-lang="kn">ಪಾಕ್‌ ಹಡಗಿನ ಅಪಾಯಕಾರಿ ಚಲನೆ: ನೌಕಾಪಡೆ ಘಟಕಕ್ಕೆ ಡಿಕ್ಕಿ</span>
+      </a>
+      <a class="rel-card" href="#">
+        <img src="article-images/pet-dogs-policy.jpg" alt="">
+        <span class="rel-cat" data-lang="en">Bengaluru</span><span class="rel-cat" data-lang="kn">ಬೆಂಗಳೂರು</span>
+        <span class="rel-head" data-lang="en">Bengaluru reworks pet dogs policy under new draft rules</span>
+        <span class="rel-head" data-lang="kn">ಸಾಕು ನಾಯಿ ನೀತಿ ಪರಿಷ್ಕರಣೆ: ಹೊಸ ಕರಡು ನಿಯಮ</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-brand">
+    <span data-lang="en">Deccan Herald</span><span data-lang="kn">ಪ್ರಜಾವಾಣಿ</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#">Prajavani</a></li><li><a href="#">Sudha</a></li><li><a href="#">Mayura</a></li>
+    <li><a href="#" data-lang="en">E-paper</a><a href="#" data-lang="kn">ಇ-ಪೇಪರ್‌</a></li>
+    <li><a href="#" data-lang="en">Classifieds</a><a href="#" data-lang="kn">ವರ್ಗೀಕೃತ</a></li>
+    <li><a href="#" data-lang="en">Contact</a><a href="#" data-lang="kn">ಸಂಪರ್ಕ</a></li>
+  </ul>
+  <ul class="footer-legal">
+    <li><a href="#" data-lang="en">About</a><a href="#" data-lang="kn">ನಮ್ಮ ಬಗ್ಗೆ</a></li>
+    <li><a href="#" data-lang="en">Privacy Policy</a><a href="#" data-lang="kn">ಗೌಪ್ಯತೆ ನೀತಿ</a></li>
+    <li><a href="#" data-lang="en">Terms</a><a href="#" data-lang="kn">ನಿಯಮಗಳು</a></li>
+  </ul>
+  <div class="footer-social">
+    <span class="soc">f</span><span class="soc">X</span><span class="soc">YT</span><span class="soc">T</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
