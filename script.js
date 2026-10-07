@@ -202,8 +202,9 @@ function setPanel(hidden){
   updateToggleLabel();
 }
 panelToggle?.addEventListener('click', () => setPanel(!controls.classList.contains('fonts-hidden')));
-// start collapsed on small screens so the panel doesn't cover the article
-setPanel(window.matchMedia('(max-width:700px)').matches);
+// start collapsed on small screens so the panel doesn't cover the article (?open=1 forces open)
+const forceOpen = new URLSearchParams(location.search).get('open') === '1';
+setPanel(window.matchMedia('(max-width:700px)').matches && !forceOpen);
 
 /* ---------- init ---------- */
 const initSite = new URLSearchParams(location.search).get('site') === 'pv' ? 'pv' : 'dh';
