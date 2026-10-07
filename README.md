@@ -23,6 +23,8 @@ A responsive replica of the Deccan Herald (English) and Prajavani (Kannada) **st
 
 Any static server works, e.g. `npx serve` in this folder, then open the printed URL.
 
-## Deployment
+## Deployment (GitHub Pages)
 
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which auto-enables and publishes to GitHub Pages.
+Served as a static site from the repository root. One-time setup:
+**Settings → Pages → Build and deployment → Source: "Deploy from a branch" → Branch: `main` / `/ (root)` → Save.**
+GitHub publishes to https://deanjohnsae-ctrl.github.io/Font-pair-options/ within ~1 minute; every push to `main` redeploys automatically. A `.nojekyll` file makes Pages serve all files verbatim.
